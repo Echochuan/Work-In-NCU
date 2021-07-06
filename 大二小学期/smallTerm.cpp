@@ -1,4 +1,5 @@
 //假设二叉树采用链式存储方式，编写一个程序，判断任意给定的二叉树是否为满二叉树。
+//一个满二叉树总结点树等于2的最大深度次方-1。
 
 #include <iostream>
 using namespace std;
@@ -42,6 +43,17 @@ int isFull(BiTree T){
 
 //主函数
 int main() {
-    
+    BiTree T;
+    {
+    cout << "创建一个树" << endl;
+    CreateBiTree(T);
+    }
+
+    if(isFull(T)) {
+        cout << "满二叉树" << endl;
+    }
+    else 
+        cout << "不是满二叉树" << endl;
+        return 0;
 }
 
