@@ -31,31 +31,40 @@ void CreateBiTree(BiTree * &T) {
 
 
 //判断是否为满二叉树
-bool isFull(BiTree T){
-    //如果左孩子与右孩子同时为空，则该树为满二叉树
-    if(T->Lchild == NULL && T->Rchild == NULL ) {
-        return 1;
+bool isFull(BiTree * T){
+    struct Node {
+        BiTree *tree;
+        int deep;           //深度
+    };
+
+    Node q[100];            //使用数组实现简单的队列
+
+    if (T == NULL) return true;
+    int rear = 0, front = 0;
+    q[rear].tree = T;
+    q[rear].deep = 0;
+
+    int dMax = 0;           //表示最大深度
+    int num = 0;            //表示结点个数
+
+    while (rear >= front) {
+        if (q[front].tree != NULL) {
+            num++;
+            q[++rear].tree = q[front].tree->Lchild;     //入队
+            q[rear].deep = q[front].deep + 1;
+            q[++rear].tree = q[front].tree -> Rchild;   //入队
+            q[rear].deep = q[front].deep + 1;
+            if (dMax < q[rear].deep)
+                dMax = q[rear].deep;
+        }
+        front++;
     }
-    //如果左孩子与右孩子中有一个为空，而另一个不为空，则不是满二叉树
-    else if (T->Lchild == NULL || T->Rchild == NULL) {
-        return 0;
-    }
-    else return 0;
+    cout << "最大深度为 = " << dMax << "  结点个数为 = " << num << endl;
+    return 1 << dMax == deep + 1;
 }
 
 //主函数
 int main() {
-    BiTree T;
-    {
-    cout << "创建一个树" << endl;
-    CreateBiTree(T);
-    }
 
-    if(isFull(T)) {
-        cout << "满二叉树" << endl;
-    }
-    else 
-        cout << "不是满二叉树" << endl;
-        return 0;
 }
 
