@@ -60,7 +60,7 @@ bool isFull(BiTree * T){
         front++;
     }
     cout << "最大深度为 = " << dMax << "  结点个数为 = " << num << endl;
-    return 1 << dMax == deep + 1;
+    return 1 << dMax == num + 1;
 }
 
 //主函数
