@@ -63,13 +63,37 @@ bool isFull(BiTree * T){
     return 1 << dMax == num + 1;
 }
 
+/**
+    按竖向打印二叉树。若二叉树为空，则执行返回。
+    否则，递归执行打印右子树，同时将层次加一，
+    然后根据曾局打印空格数，输出根结点，最后递归打印左子树。
+**/
+void PrintTree(BiTree *T, int l) {
+    if (!T) {
+        return;
+    } 
+
+    PrintTree(T->Rchild, l+1);
+    for(int i = 0; i < l; i++) {
+        cout << "   ";
+    }
+
+    if (l == 0) {
+        cout << T->data << endl;
+    }else {
+        cout << "——" << T->data << endl;
+    }
+    PrintTree(T->Lchild, l+1);
+}
+
+
 //主函数
 int main() {
     BiTree *T;
     cout << "使用先序遍历的方法输入结点数据，当输入-1时表示该结点为空 ";
     CreateBiTree(T);
-    cout << "建好的树输出如下 ";
-    cout << T;
+    cout << "建好的树按照横向输出如下 " << endl;
+    PrintTree(T,0);
     string a = isFull(T) ? "是" : "不是";
     cout << "该二叉树 " << a << "满二叉树";
 

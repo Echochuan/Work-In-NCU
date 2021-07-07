@@ -1,3 +1,2 @@
 
-    cout << "创建一个树" << endl;
-    CreateBiTree(T);
+    for(int i = 0; i < l; i++) {
